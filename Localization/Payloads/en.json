@@ -1,0 +1,40 @@
+{
+    "label.welcoming.login.mail": "E-mail:",
+    "label.welcoming.login.mail.placeholder": "name@domain.ext",
+    "label.welcoming.login.password": "Password:",
+    "label.welcoming.login.password.placeholder": "********",
+    "label.welcoming.login.login": "Login",
+    "label.welcoming.login.password.recovery": "Forgor your password?",
+    "label.welcoming.login.back": "Back",
+
+    "label.welcoming.message.loginLeading": "Already have an account?",
+    "label.welcoming.message.loginTrailing": "Log in!",
+    "label.welcoming.message.title": "Looking after your weight?",
+    "label.welcoming.message.body": "Who isn't, right?\nWe're here for you, helping you keep track of your journey... and much more!",
+    "label.welcoming.message.start": "Let's go!",
+
+    "label.welcoming.signup.mail": "E-mail:",
+    "label.welcoming.signup.mail.placeholder": "name@domain.ext",
+    "label.welcoming.signup.password": "Password:",
+    "label.welcoming.signup.password.placeholder": "********",
+    "label.welcoming.signup.password.confirm": "Repeat password:",
+    "label.welcoming.signup.password.confirm.placeholder": "********",
+    "label.welcoming.signup.signup": "Sign up",
+    "label.welcoming.signup.back": "Back",
+
+    "label.welcoming.password.recovery.body": "Enter your e-mail. You will receive a message instructing on how to recover your password.\nThank you.",
+    "label.welcoming.password.recovery.mail": "E-mail:",
+    "label.welcoming.password.recovery.mail.placeholder": "name@domain.ext",
+    "label.welcoming.password.recovery.back": "Back",
+    "label.welcoming.password.recovery.recover": "Recover e-mail",
+    "label.welcoming.password.recovery.incorrect.email.title": "Invalid e-mail",
+    "label.welcoming.password.recovery.incorrect.email.body": "Please check the e-mail and try again.",
+    "label.welcoming.password.recovery.incorrect.email.ok": "Ok",
+
+    "launch.screen.app.name": "Weight Tracker",
+    "launch.screen.app.loading.0": "Loading",
+    "launch.screen.app.loading.1": "Loading.",
+    "launch.screen.app.loading.2": "Loading..",
+    "launch.screen.app.loading.3": "Loading...",
+    "launch.screen.app.copyright": "Health Mapp - %d"
+}

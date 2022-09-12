@@ -1,0 +1,40 @@
+{
+    "label.welcoming.login.mail": "E-mail:",
+    "label.welcoming.login.mail.placeholder": "nome@domínio.ext",
+    "label.welcoming.login.password": "Palavra-passe:",
+    "label.welcoming.login.password.placeholder": "********",
+    "label.welcoming.login.login": "Autenticar",
+    "label.welcoming.login.password.recovery": "Esqueceu-se da palavra-passe?",
+    "label.welcoming.login.back": "Voltar",
+
+    "label.welcoming.message.loginLeading": "Já tem uma conta?",
+    "label.welcoming.message.loginTrailing": "Autentique-se!",
+    "label.welcoming.message.title": "A cuidar do seu peso?",
+    "label.welcoming.message.body": "E quem não está, não é verdade?\nE nós estamos aqui para ajudar nesse percurso... e muito mais!",
+    "label.welcoming.message.start": "Vamos lá!",
+
+    "label.welcoming.signup.mail": "E-mail:",
+    "label.welcoming.signup.mail.placeholder": "nome@domínio.ext",
+    "label.welcoming.signup.password": "Palavra-passe:",
+    "label.welcoming.signup.password.placeholder": "********",
+    "label.welcoming.signup.password.confirm": "Confirme palavra-passe:",
+    "label.welcoming.signup.password.confirm.placeholder": "********",
+    "label.welcoming.signup.signup": "Criar conta",
+    "label.welcoming.signup.back": "Voltar",
+
+    "label.welcoming.password.recovery.body": "Introduza o seu e-mail. Irá receber uma mensagem com instruções de recuperação.\nObrigado.",
+    "label.welcoming.password.recovery.mail": "E-mail:",
+    "label.welcoming.password.recovery.mail.placeholder": "nome@domínio.ext",
+    "label.welcoming.password.recovery.back": "Voltar",
+    "label.welcoming.password.recovery.recover": "Recuperar e-mail",
+    "label.welcoming.password.recovery.incorrect.email.title": "E-mail inválido",
+    "label.welcoming.password.recovery.incorrect.email.body": "Verifique o e-mail e tente novamente por favor.",
+    "label.welcoming.password.recovery.incorrect.email.ok": "Ok",
+
+    "launch.screen.app.name": "Weight Tracker",
+    "launch.screen.app.loading.0": "A carregar",
+    "launch.screen.app.loading.1": "A carregar.",
+    "launch.screen.app.loading.2": "A carregar..",
+    "launch.screen.app.loading.3": "A carregar...",
+    "launch.screen.app.copyright": "Health Mapp - %d"
+}

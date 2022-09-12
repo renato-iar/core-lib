@@ -1,0 +1,102 @@
+{
+    "name": "Default Theme",
+    "palette": [
+        {
+            "name": "background",
+            "light": 0xFFFFFFFF,
+            "dark": 0xFF000000
+        },
+        {
+            "name": "backgroundSecondary",
+            "light": 0xFFD0D0D0,
+            "dark": 0xFF0D0D0D
+        },
+        {
+            "name": "backgroundInverted",
+            "light": 0xFF000000,
+            "dark": 0xFFFFFFFF
+        },
+        {
+            "name": "text",
+            "light": 0xFF000000,
+            "dark": 0xFFFFFFFF
+        },
+        {
+            "name": "textSecondary",
+            "light": 0xFF666666,
+            "dark": 0xFF999999
+        },
+        {
+            "name": "textInverted",
+            "light": 0xFFFFFFFF,
+            "dark": 0xFF000000
+        },
+        {
+            "name": "textHighlighted",
+            "light": 0xFFFFFFFF,
+        },
+        {
+            "name": "highlight",
+            "light": 0xFF1199CC
+        },
+        {
+            "name": "trendPositive",
+            "light": 0xFF11DA11
+        },
+        {
+            "name": "trendNegative",
+            "light": 0xFFDA1111
+        },
+        {
+            "name": "trendSame",
+            "light": 0xFFDADA11
+        },
+        {
+            "name": "var boxGradientStart",
+            "light": 0x0510B9
+        },
+        {
+            "name": "var boxGradientEnd",
+            "light": 0xB91005
+        }
+    ],
+    "typography": [
+        {
+            "name": "text",
+            "system": true,
+            "fontName": "Helvetica",
+            "fontWeight": "regular",
+            "fontSize": 16
+        },
+        {
+            "name": "title",
+            "system": true,
+            "fontName": "Helvetica",
+            "fontWeight": "regular",
+            "fontSize": 24
+        },
+        {
+            "name": "largeTitle",
+            "system": true,
+            "fontName": "Helvetica",
+            "fontWeight": "regular",
+            "fontSize": 48
+        },
+        {
+            "name": "subtitle",
+            "system": true,
+            "fontName": "Helvetica",
+            "fontWeight": "bold",
+            "fontSize": 18
+        },
+        {
+            "name": "caption",
+            "system": true,
+            "fontName": "Helvetica",
+            "fontWeight": "bold",
+            "fontSize": 14
+        },
+    ],
+    "iconography": {
+    }
+}
