@@ -18,10 +18,10 @@ public final class ConcreteCacheManager: CacheManager {
 
     // MARK: Properties
     private let network: any Network
-    private let persistentStoreReader: any ReadableStore
-    private let persistentStoreWriter: any WriteableStore
-    private let volatileStoreReader: any ReadableStore
-    private let volatileStoreWriter: any WriteableStore
+    private let persistentStoreReader: any ReadableStorage
+    private let persistentStoreWriter: any WriteableStorage
+    private let volatileStoreReader: any ReadableStorage
+    private let volatileStoreWriter: any WriteableStorage
     private let encoder: any Encoder
     private let decoder: any Decoder
     private let timestampProvider: any TimestampProvider
@@ -42,10 +42,10 @@ public final class ConcreteCacheManager: CacheManager {
     // MARK: Initializers
 
     public init(network: any Network,
-                persistentStoreReader: any ReadableStore,
-                persistentStoreWriter: any WriteableStore,
-                volatileStoreReader: any ReadableStore,
-                volatileStoreWriter: any WriteableStore,
+                persistentStoreReader: any ReadableStorage,
+                persistentStoreWriter: any WriteableStorage,
+                volatileStoreReader: any ReadableStorage,
+                volatileStoreWriter: any WriteableStorage,
                 encoder: any Encoder,
                 decoder: any Decoder,
                 timestampProvider provider: any TimestampProvider) {
@@ -66,11 +66,12 @@ extension ConcreteCacheManager {
 
     public static var shared: some CacheManager = {
 
-        guard let persistentStore = FileStore(baseFolder: "persistent", storeType: .persistent),
-              let volatileStore = FileStore(baseFolder: "volatile", storeType: .volatile)
-        else {
+        guard let persistentStore = FileStore(baseFolder: "persistent", storeType: .persistent) else {
+            fatalError("Failed to create persistent store")
+        }
 
-            fatalError("Should be able to create stores")
+        guard let volatileStore = FileStore(baseFolder: "volatile", storeType: .volatile) else {
+            fatalError("Failed to create volatile store")
         }
 
         return ConcreteCacheManager(network: URLSession.shared,

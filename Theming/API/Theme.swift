@@ -7,12 +7,19 @@
 
 import SwiftUI
 
-public protocol Theme: ObservableObject {
+public protocol Theme {
+
+    associatedtype ThemeColorPaletteType: ColorPalette
+    associatedtype ThemeTypographyType: Typography
+    associatedtype ThemeIconographyType: Iconography
+    associatedtype ThemeGalleryType: Gallery
+    associatedtype ThemeDimensionsType: Dimensions
 
     var name: String { get }
 
-    var palette: any ColorPalette { get }
-    var typography: any Typography { get }
-    var icongraphy: any Iconography { get }
-    var gallery: any Gallery { get }
+    var palette: ThemeColorPaletteType { get }
+    var typography: ThemeTypographyType { get }
+    var iconography: ThemeIconographyType { get }
+    var gallery: ThemeGalleryType { get }
+    var dimensions: ThemeDimensionsType { get }
 }

@@ -1,10 +1,3 @@
-//
-//  Path+Utils.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 04/09/2022.
-//
-
 import SwiftUI
 
 public extension Path {

@@ -1,10 +1,3 @@
-//
-//  FileStore.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 15/08/2022.
-//
-
 import Foundation
 import FileSystem_API
 
@@ -49,27 +42,23 @@ public final class FileStore {
 // MARK: - Types
 
 public extension FileStore {
-
     enum StoreType {
-
         case volatile
         case persistent
     }
 }
 
-// MARK: - ReadableStore
+// MARK: - ReadableStorage
 
-extension FileStore: ReadableStore {
+extension FileStore: ReadableStorage {
 
     public var resource: URL { self.baseURL }
 
     public func read(identifier: String, secondaryIdentifier: String?) throws -> Data {
-
         return try Data(contentsOf: self.url(for: identifier, secondaryIdentifier: secondaryIdentifier).destination)
     }
 
     public func exists(identifier: String, secondaryIdentifier: String?) -> Bool {
-
         let url = self.url(for: identifier, secondaryIdentifier: secondaryIdentifier).destination
         var isDirectory = ObjCBool(booleanLiteral: false)
 
@@ -77,18 +66,15 @@ extension FileStore: ReadableStore {
     }
 }
 
-// MARK: - WriteableStore
+// MARK: - WriteableStorage
 
-extension FileStore: WriteableStore {
-
+extension FileStore: WriteableStorage {
     public func write(_ data: Data, identifier: String, secondaryIdentifier: String?) throws {
-
         let (enclosingUrl, url) = self.url(for: identifier, secondaryIdentifier: secondaryIdentifier)
 
         var isDirectory = ObjCBool(booleanLiteral: false)
 
         if !FileManager.default.fileExists(atPath: enclosingUrl.path, isDirectory: &isDirectory) || !isDirectory.boolValue {
-
             try FileManager.default.createDirectory(at: enclosingUrl, withIntermediateDirectories: true)
         }
 
@@ -96,7 +82,6 @@ extension FileStore: WriteableStore {
     }
 
     public func delete(identifier: String, secondaryIdentifier: String?) throws {
-
         let url = self.url(for: identifier, secondaryIdentifier: secondaryIdentifier).destination
 
         var isDirectory = ObjCBool(booleanLiteral: false)
@@ -111,9 +96,7 @@ extension FileStore: WriteableStore {
 // MARK: - Utils
 
 private extension FileStore {
-
     func url(for identifier: String, secondaryIdentifier: String?) -> (enclosingFolder: URL, destination: URL) {
-
         var enclosingUrl = self.baseURL
         var url: URL
 
@@ -124,7 +107,6 @@ private extension FileStore {
         }
 
         if let secondaryIdentifier = secondaryIdentifier {
-
             enclosingUrl = url
 
             if #available(iOS 16, *) {

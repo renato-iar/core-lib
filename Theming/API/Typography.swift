@@ -1,41 +1,18 @@
-//
-//  Typography.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 21/08/2022.
-//
-
-import SwiftUI
-
-public enum TypographyType: String, CaseIterable {
-
-    case text
-    case title
-    case largeTitle
-    case subtitle
-    case caption
-}
-
 public protocol Typography {
+    associatedtype Font
 
-    var text: Font { get }
-    var title: Font { get }
-    var largeTitle: Font { get }
-    var subtitle: Font { get }
-    var caption: Font { get }
+    func font(for type: TypographyType) -> Font
 }
 
 public extension Typography {
-
-    func font(for type: TypographyType) -> Font {
-
-        switch type {
-        case .text: return self.text
-        case .title: return self.title
-        case .largeTitle: return self.largeTitle
-        case .subtitle: return self.subtitle
-        case .caption: return self.caption
-        }
-    }
+    var body: Font { self.font(for: .body) }
+    var bodyBold: Font { self.font(for: .bodyBold) }
+    var title: Font { self.font(for: .title) }
+    var largeTitle: Font { self.font(for: .largeTitle) }
+    var largeTitleThin: Font { self.font(for: .largeTitleThin) }
+    var subtitle: Font { self.font(for: .subtitle) }
+    var caption: Font { self.font(for: .caption) }
+    var action: Font { self.font(for: .action) }
+    var footnote: Font { self.font(for: .footnote) }
 }
 

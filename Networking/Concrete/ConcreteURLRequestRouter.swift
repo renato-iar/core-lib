@@ -1,11 +1,5 @@
-//
-//  ConcreteURLRequestRouter.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 17/08/2022.
-//
-
 import Foundation
+import Networking_API
 
 public final class ConcreteURLRequestRouter {
 
@@ -23,9 +17,7 @@ public final class ConcreteURLRequestRouter {
 // MARK: - Errors
 
 extension ConcreteURLRequestRouter {
-
     public enum Errors: Error {
-
         case invalidBaseURL(URL)
         case invalidURLComposition
     }
@@ -34,15 +26,12 @@ extension ConcreteURLRequestRouter {
 // MARK: - URLRequestRouter
 
 extension ConcreteURLRequestRouter: URLRequestRouter {
-
-    public func execute(input: URLRequestRouterInput) throws -> URLRequest {
-
+    public func route(input: URLRequestRouterInput) throws -> URLRequest {
         guard var components = URLComponents(url: self.baseURL, resolvingAgainstBaseURL: false) else {
             throw Errors.invalidBaseURL(self.baseURL)
         }
 
         if let slug = input.slug?.trimmingCharacters(in: .whitespaces), !slug.isEmpty {
-
             components.path += "/\(slug)"
         }
 

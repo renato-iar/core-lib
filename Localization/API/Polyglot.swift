@@ -17,7 +17,7 @@ public protocol Polyglot {
     var localePublisher: any PublisherType { get }
 
     func label(for key: String) -> String
-    func set(locale: LocaleKeyType, force: Bool)
+    func set(locale: LocaleKeyType, force: Bool) throws
 }
 
 public extension Polyglot {
@@ -26,7 +26,7 @@ public extension Polyglot {
         self.label(for: key.rawValue)
     }
 
-    func set(locale: LocaleKeyType) {
-        self.set(locale: locale, force: false)
+    func set(locale: LocaleKeyType) throws {
+        try self.set(locale: locale, force: false)
     }
 }

@@ -1,10 +1,3 @@
-//
-//  ImageCache.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 16/08/2022.
-//
-
 import UIKit
 
 public protocol ImageCache {

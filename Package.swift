@@ -12,6 +12,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
+        .package(url: "https://github.com/googleads/swift-package-manager-google-mobile-ads.git", .upToNextMajor(from: .init(stringLiteral: "9.0.0")))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -22,7 +23,9 @@ let package = Package(
 // Modules definition
 
 enum Modules: String {
+    case adService = "AdService"
     case cache = "Cache"
+    case charting = "Charting"
     case fileSystem = "FileSystem"
     case localization = "Localization"
     case logging = "Logging"
@@ -42,10 +45,39 @@ enum Modules: String {
     var testsName: String { self.concreteName + "_Tests" }
     var testsPath: String { self.concreteName + "/Tests" }
 
+    var mockName: String { self.concreteName + "_Mock" }
+    var mockPath: String { self.concreteName + "/Mock" }
+
     var payloadsPath: String { "Payloads" }
+
+    func concretePath(_ extended: String) -> String {
+        self.concretePath + "/" + extended
+    }
+    func concreteName(_ extended: String) -> String {
+        self.concreteName + extended
+    }
 
     func payload(_ name: String) -> String { self.payloadsPath + "/" + name }
 }
+
+// MARK: - AdService
+/*
+package.targets.append(contentsOf: [
+    .target(name: Modules.adService.concreteName,
+            dependencies: [
+                .init(stringLiteral: Modules.utilities.concreteName),
+                .init(stringLiteral: Modules.theming.apiName),
+                .init(stringLiteral: Modules.theming.concreteName("_UIKit")),
+                .product(name: "GoogleMobileAds", package: "swift-package-manager-google-mobile-ads")
+            ],
+            path: Modules.adService.basePath)
+])
+
+package.products.append(contentsOf: [
+    .library(name: Modules.adService.concreteName,
+             targets: [Modules.adService.concreteName])
+])
+*/
 
 // MARK: - Cache
 
@@ -64,19 +96,9 @@ package.targets.append(contentsOf: [
                 .init(stringLiteral: Modules.fileSystem.concreteName),
                 .init(stringLiteral: Modules.networking.apiName),
                 .init(stringLiteral: Modules.networking.concreteName),
-                .init(stringLiteral: Modules.cache.apiName),
+                .init(stringLiteral: Modules.cache.apiName)
             ],
-            path: Modules.cache.concretePath),
-    .testTarget(name: Modules.cache.testsName,
-                dependencies: [
-                    .init(stringLiteral: Modules.utilities.concreteName),
-                    .init(stringLiteral: Modules.fileSystem.apiName),
-                    .init(stringLiteral: Modules.fileSystem.concreteName),
-                    .init(stringLiteral: Modules.networking.apiName),
-                    .init(stringLiteral: Modules.cache.apiName),
-                    .init(stringLiteral: Modules.cache.concreteName)
-                ],
-                path: Modules.cache.testsPath)
+            path: Modules.cache.concretePath)
 ])
 
 package.products.append(contentsOf: [
@@ -126,20 +148,22 @@ package.targets.append(contentsOf: [
                 .init(stringLiteral: Modules.logging.apiName),
                 .init(stringLiteral: Modules.logging.concreteName)
             ],
-            path: Modules.localization.concretePath,
-            resources: [
-                .copy(Modules.localization.payload("en-US.json")),
-                .copy(Modules.localization.payload("en.json")),
-                .copy(Modules.localization.payload("pt-PT.json")),
-                .copy(Modules.localization.payload("pt-BR.json"))
-            ]),
+            path: Modules.localization.concretePath),
+    .target(name: Modules.localization.mockName,
+            dependencies: [
+                .init(stringLiteral: Modules.localization.apiName),
+                .init(stringLiteral: Modules.localization.concreteName)
+            ],
+            path: Modules.localization.mockPath)
 ])
 
 package.products.append(contentsOf: [
     .library(name: Modules.localization.apiName,
              targets: [Modules.localization.apiName]),
     .library(name: Modules.localization.concreteName,
-             targets: [Modules.localization.concreteName])
+             targets: [Modules.localization.concreteName]),
+    .library(name: Modules.localization.mockName,
+             targets: [Modules.localization.mockName])
 ])
 
 // MARK: - Logging
@@ -170,13 +194,15 @@ package.products.append(contentsOf: [
 package.targets.append(contentsOf: [
     .target(name: Modules.networking.apiName,
             dependencies: [
-                .init(stringLiteral: Modules.utilities.concreteName)
+                .init(stringLiteral: Modules.utilities.concreteName),
+                .init(stringLiteral: Modules.useCases.concreteName)
             ],
             path: Modules.networking.apiPath),
     .target(name: Modules.networking.concreteName,
             dependencies: [
                 .init(stringLiteral: Modules.utilities.concreteName),
-                .init(stringLiteral: Modules.networking.apiName)
+                .init(stringLiteral: Modules.networking.apiName),
+                .init(stringLiteral: Modules.useCases.concreteName)
             ],
             path: Modules.networking.concretePath)
 ])
@@ -191,25 +217,48 @@ package.products.append(contentsOf: [
 // MARK: - Theming
 
 package.targets.append(contentsOf: [
-    .target(name: Modules.theming.concreteName,
+    .target(name: Modules.theming.apiName,
             dependencies: [
                 .init(stringLiteral: Modules.utilities.concreteName)
             ],
-            path: Modules.theming.concretePath),
-    .testTarget(name: Modules.theming.testsName,
-                dependencies: [
-                    .init(stringLiteral: Modules.utilities.concreteName),
-                    .init(stringLiteral: Modules.theming.concreteName)
-                ],
-                path: Modules.theming.testsPath,
-                resources: [
-                    .copy(Modules.theming.payload("default-theme.json"))
-                ])
+            path: Modules.theming.apiPath),
+    .target(name: Modules.theming.concreteName("_SwiftUI"),
+            dependencies: [
+                .init(stringLiteral: Modules.utilities.concreteName),
+                .init(stringLiteral: Modules.theming.apiName)
+            ],
+            path: Modules.theming.concretePath("SwiftUI")),
+    .target(name: Modules.theming.concreteName("_UIKit"),
+            dependencies: [
+                .init(stringLiteral: Modules.utilities.concreteName),
+                .init(stringLiteral: Modules.theming.apiName)
+            ],
+            path: Modules.theming.concretePath("UIKit"))
 ])
 
 package.products.append(contentsOf: [
-    .library(name: Modules.theming.concreteName,
-             targets: [Modules.theming.concreteName])
+    .library(name: Modules.theming.apiName,
+             targets: [Modules.theming.apiName]),
+    .library(name: Modules.theming.concreteName("_SwiftUI"),
+             targets: [Modules.theming.concreteName("_SwiftUI")]),
+    .library(name: Modules.theming.concreteName("_UIKit"),
+             targets: [Modules.theming.concreteName("_UIKit")])
+])
+
+
+// MARK: - Charting
+
+package.targets.append(contentsOf: [
+    .target(name: Modules.charting.concreteName,
+            dependencies: [
+                .init(stringLiteral: Modules.utilities.concreteName),
+            ],
+            path: Modules.charting.concretePath)
+])
+
+package.products.append(contentsOf: [
+    .library(name: Modules.charting.concreteName,
+             targets: [Modules.charting.concreteName])
 ])
 
 // MARK: - UseCases
@@ -225,17 +274,12 @@ package.products.append(contentsOf: [
              targets: [Modules.useCases.concreteName])
 ])
 
-// MARK: - Utiliiies
+// MARK: - Utilities
 
 package.targets.append(contentsOf: [
     .target(name: Modules.utilities.concreteName,
             dependencies: [],
             path: Modules.utilities.basePath),
-    .testTarget(name: Modules.utilities.testsName,
-                dependencies: [
-                    .init(stringLiteral: Modules.utilities.concreteName)
-                ],
-                path: Modules.utilities.testsPath)
 ])
 
 package.products.append(contentsOf: [

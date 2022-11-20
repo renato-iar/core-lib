@@ -1,14 +1,6 @@
-//
-//  URLRequestRouterInput.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 17/08/2022.
-//
-
 import Foundation
 
 public struct URLRequestRouterInput {
-
     public let slug: String?
     public let parameters: [String: String]?
     public let username: String?

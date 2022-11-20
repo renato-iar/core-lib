@@ -9,14 +9,16 @@ import Foundation
 import Utilities
 
 import Cache_API
+import FileSystem_API
+import Networking_API
 
 public final class ReadableWriteableCache {
 
     // MARK: Properties
 
     private let network: any Network
-    private let storeReader: any ReadableStore
-    private let storeWriter: any WriteableStore
+    private let storeReader: any ReadableStorage
+    private let storeWriter: any WriteableStorage
     private let encoder: any Encoder
     private let decoder: any Decoder
     private let timestampProvider: any TimestampProvider
@@ -28,8 +30,8 @@ public final class ReadableWriteableCache {
     // MARK: Initializers
 
     public init(network: any Network,
-                storeReader reader: ReadableStore,
-                storeWriter writer: WriteableStore,
+                storeReader reader: ReadableStorage,
+                storeWriter writer: WriteableStorage,
                 encoder: Encoder = JSONEncoder(),
                 decoder: Decoder = JSONDecoder(),
                 timestampProvider provider: TimestampProvider) {

@@ -1,10 +1,3 @@
-//
-//  ConcretePolyglot.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 01/09/2022.
-//
-
 import Combine
 import Foundation
 
@@ -15,7 +8,7 @@ import Logging_API
 import Logging
 import Utilities
 
-public enum LanguageType: String {
+public enum LanguageType: String, CaseIterable {
 
     case en = "en"
     case enUS = "en-US"
@@ -49,19 +42,37 @@ public final class ConcretePolyglot: ObservableObject {
          cache: any CacheManager = ConcreteCacheManager.shared,
          bundle: Bundle = Bundle.main,
          logger: Logging = ConcreteLogger.shared,
-         decoder: Decoder = JSONDecoder()) {
+         decoder: Decoder = JSONDecoder()) throws {
         self.decoder = decoder
         self.bundle = bundle
         self.subject = .init(locale)
         self.cacheManager = cache
         self.logger = logger
 
-        self.loadLanguage(for: locale)
+        try self.loadLanguage(for: locale)
+    }
+
+    private init(with locale: LocaleKeyType,
+                 cache: any CacheManager = ConcreteCacheManager.shared,
+                 bundle: Bundle = Bundle.main,
+                 logger: Logging = ConcreteLogger.shared,
+                 decoder: Decoder = JSONDecoder()) {
+        self.decoder = decoder
+        self.bundle = bundle
+        self.subject = .init(locale)
+        self.cacheManager = cache
+        self.logger = logger
+
+        do {
+            try self.loadLanguage(for: locale)
+        } catch {
+            Task { await self.logger.error(error.localizedDescription) }
+        }
     }
 
     // MARK: Shared
 
-    public static let shared = ConcretePolyglot(initialLocale: .ptPT)
+    public static let shared = ConcretePolyglot(with: .ptPT)
 }
 
 // MARK: - Polyglot
@@ -77,15 +88,13 @@ extension ConcretePolyglot: Polyglot {
         self.translations[locale]?[key] ?? key
     }
 
-    public func set(locale: LanguageType, force: Bool) {
+    public func set(locale: LanguageType, force: Bool) throws {
 
         guard self.translations[locale] == nil || force else { return }
 
-        self.loadLanguage(for: locale) { [weak self] error in
-            if error != nil {
-                self?.subject.value = locale
-            }
-        }
+        try self.loadLanguage(for: locale)
+
+        self.subject.value = locale
     }
 }
 
@@ -93,22 +102,17 @@ extension ConcretePolyglot: Polyglot {
 
 private extension ConcretePolyglot {
 
-    func loadLanguage(for locale: LocaleKeyType, completion: ((Error?) -> Void)? = nil) {
+    func loadLanguage(for locale: LocaleKeyType) throws {
         do {
             try self.loadLanguageFromCache(for: locale)
-
-            completion?(nil)
-
         } catch {
 
             do {
                 try self.loadLanguageFromBundle(for: locale)
-
-                completion?(nil)
             } catch {
                 Task { await self.logger.log(error.localizedDescription, level: .error) }
 
-                completion?(ConcretePolyglotError.unableToLoad(language: locale, underlyingError: error))
+                throw error
             }
         }
     }

@@ -1,10 +1,3 @@
-//
-//  Sharable.swift
-//  WeigthTracker
-//
-//  Created by Renato Ribeiro on 08/09/2022.
-//
-
 /**
  Represents types that may contain a shared instance.
 

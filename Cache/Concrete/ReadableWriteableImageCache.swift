@@ -9,6 +9,7 @@ import CryptoKit
 import UIKit
 
 import Cache_API
+import Networking_API
 
 final class ReadableWriteableImageCache {
 
