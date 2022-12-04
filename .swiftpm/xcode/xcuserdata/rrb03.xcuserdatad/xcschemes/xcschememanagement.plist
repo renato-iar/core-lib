@@ -12,7 +12,7 @@
 		<key>Cache.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>Cache_API.xcscheme_^#shared#^_</key>
 		<dict>
@@ -67,7 +67,7 @@
 		<key>Modules-Package.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>0</integer>
 		</dict>
 		<key>Networking.xcscheme_^#shared#^_</key>
 		<dict>
@@ -84,21 +84,42 @@
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>20</integer>
+			<integer>19</integer>
 		</dict>
 		<key>Promises (Playground) 2.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
+			<integer>20</integer>
+		</dict>
+		<key>Promises (Playground) 3.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
 			<integer>21</integer>
+		</dict>
+		<key>Promises (Playground) 4.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>22</integer>
+		</dict>
+		<key>Promises (Playground) 5.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>23</integer>
 		</dict>
 		<key>Promises (Playground).xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
-			<integer>19</integer>
+			<integer>18</integer>
 		</dict>
 		<key>Theming.xcscheme_^#shared#^_</key>
 		<dict>
@@ -153,6 +174,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>Charting</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>FileSystem</key>
 		<dict>
 			<key>primary</key>
@@ -169,6 +195,11 @@
 			<true/>
 		</dict>
 		<key>Localization_API</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>Localization_Mock</key>
 		<dict>
 			<key>primary</key>
 			<true/>
