@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-public protocol Polyglot {
+public protocol Polyglot<LocaleKeyType> {
 
     associatedtype LocaleKeyType: RawRepresentable where LocaleKeyType.RawValue == String
     typealias PublisherType = Publisher<LocaleKeyType, Never>
